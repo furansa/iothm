@@ -45,10 +45,10 @@ $ docker-compose stop
 Each service is exposed through a specific port, after build and run it's
 possible to access the following:
 
-* Data REST API, port 8000
+* Events REST API, port 8000
+* Events Database, port 5432
 * Elasticsearch, port 9200
 * Kibana, port 5601
-* PostgreSQL Database, port 5432
 
 Detailed information about each service will be provided inside the respective
 folders.
