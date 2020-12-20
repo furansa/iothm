@@ -55,12 +55,12 @@ services:
 
     events_rest_api:
         environment:
-            - APP_DEBUG_MODE=True
-            - APP_HOST=0.0.0.0
-            - APP_PORT=8000
-            - APP_SPEC_DIR=./resources
-            - APP_TEST_MODE=False
-            - APP_VERSION=0.0.1
+            - DEBUG_MODE=True
+            - HOST=0.0.0.0
+            - PORT=8000
+            - SPEC_DIR=./resources
+            - TEST_MODE=False
+            - VERSION=0.0.1
             - PYTHONUNBUFFERED=1
         container_name: iothm_events_rest_api
         image: iothm_events_rest_api:dev

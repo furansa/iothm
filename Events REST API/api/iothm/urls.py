@@ -14,8 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
 
+from iothm.events import views
+
+router = routers.DefaultRouter()
+
+# Automatically generate the URL by registering the viewset as a router class
+router.register(r"users", views.UserViewSet)
+router.register(r"groups", views.GroupViewSet)
+
+# Use automatic URL routing to wire up
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("", include(router.urls)),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
