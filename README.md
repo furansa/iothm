@@ -1,9 +1,9 @@
 # IoTHM
 
-[![Unit Tests](https://github.com/furansa/vehicle-tracker-simulator/workflows/Unit%20Tests/badge.svg)](https://github.com/furansa/vehicle-tracker-simulator/actions?query=workflow%3A%22Unit+Tests%22)
-[![System Tests](https://github.com/furansa/vehicle-tracker-simulator/workflows/System%20Tests/badge.svg)](https://github.com/furansa/vehicle-tracker-simulator/actions?query=workflow%3A%22System+Tests%22)
-[![Lint](https://github.com/furansa/vehicle-tracker-simulator/workflows/Lint/badge.svg)](https://github.com/furansa/vehicle-tracker-simulator/actions?query=workflow%3ALint)
-[![codecov](https://codecov.io/gh/furansa/vehicle-tracker-simulator/branch/main/graph/badge.svg?token=D7L7F5UXFB)](https://codecov.io/gh/furansa/vehicle-tracker-simulator)
+[![Unit Tests]]
+[![System Tests]]
+[![Lint]]
+[![codecov]]
 
 The IoTHM is a distributed data-driven IoT platform which combines information
 from different hardware sensors applied to home monitoring. The goal is to
