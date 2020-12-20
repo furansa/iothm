@@ -16,7 +16,8 @@ This is a open-source project based on many tools such as: Docker, Python,
 Django, PostgreSQL, Redis, Elasticsearch and so on. Here are the services which
 are part of the IoTHM:
 
-* [Data REST API, provides access to the monitoring data in a form of a REST API](./Data%20REST%20API/README.md)
+* [Events REST API, provides access to the monitoring data in a form of a REST API](./Events%20REST%20API/README.md)
+* [Events Database, database containing all the monitoring data](./Events%20Database/README.md)
 * [Monitoring, centralized platform's log monitoring](./Monitoring/README.md)
 * [Sensoring, reads and sends the data from the hardware sensors to be processed](./Sensoring/README.md)
 
@@ -177,4 +178,8 @@ run the checking manually, run:
 ```shell
 $ pre-commit run --all-files
 ```
+
+## References
+
+* [The Twelve-Factor App](https://12factor.net)
 

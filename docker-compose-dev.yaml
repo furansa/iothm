@@ -1,0 +1,91 @@
+version: "3.7"
+
+services:
+    elasticsearch:
+        environment:
+            - discovery.type=single-node
+        container_name: iothm_elasticsearch
+        image: elasticsearch:7.10.1
+        networks:
+            - iothm_public
+        ports:
+            - 9200:9200
+            - 9300:3200
+        healthcheck:
+            test: ["CMD", "curl", "-s", "-f", "http://localhost:9200/_cat/health"]
+            interval: 30s
+            retries: 3
+
+    kibana:
+        container_name: iothm_kibana
+        image: kibana:7.10.1
+        networks:
+            - iothm_public
+        ports:
+            - 5601:5601
+        depends_on:
+            - elasticsearch
+        healthcheck:
+            test: ["CMD", "curl", "-s", "-f", "http://localhost:5601/login"]
+            interval: 30s
+            retries: 3
+
+    events_database:
+        environment:
+            - POSTGRES_DB=iothm_events
+            - POSTGRES_HOST=localhost
+            - POSTGRES_USER=iothm_events
+            - POSTGRES_PASSWORD=iothm_events
+        container_name: iothm_events_database
+        image: iothm_events_database:dev
+        build:
+            context: ./Events Database/resources
+            args:
+            - IMAGE_DESCRIPTION=IoTHM events database, development image
+        networks:
+            - iothm_public
+        ports:
+            - 5432:5432
+        depends_on:
+            - elasticsearch
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 30s
+            retries: 3
+
+    events_rest_api:
+        environment:
+            - APP_DEBUG_MODE=True
+            - APP_HOST=0.0.0.0
+            - APP_PORT=8000
+            - APP_SPEC_DIR=./resources
+            - APP_TEST_MODE=False
+            - APP_VERSION=0.0.1
+            - PYTHONUNBUFFERED=1
+        container_name: iothm_events_rest_api
+        image: iothm_events_rest_api:dev
+        build:
+            context: ./Events REST API/resources
+            args:
+            - PIP_OPTIONS=--dev --skip-lock --system
+            - IMAGE_DESCRIPTION=IoTHM Events REST API, development image
+        networks:
+            - iothm_public
+        ports:
+            - 8000:8000
+        volumes:
+            - ./Events REST API/api:/api
+            - ./Events REST API/resources/entrypoint.sh:/tmp/entrypoint.sh:ro
+        depends_on:
+            - events_database
+            - elasticsearch
+        healthcheck:
+            test: curl -f http://localhost:8000 || exit 1
+            interval: 10s
+            retries: 3
+            start_period: 30s
+
+networks:
+    iothm_public:
+        name: iothm_public
+
