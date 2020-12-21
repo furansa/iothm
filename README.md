@@ -5,6 +5,8 @@
 [![Lint]]
 [![codecov]]
 
+**[WiP]**
+
 The IoTHM is a distributed data-driven IoT platform which combines information
 from different hardware sensors applied to home monitoring. The goal is to
 support embedded platforms such as ESP32 to monitor aspects like temperature,
