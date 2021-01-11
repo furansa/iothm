@@ -31,11 +31,10 @@ services:
             retries: 3
 
     events_database:
+        env_file:
+            - env_secrets.dev
         environment:
-            - POSTGRES_DB=iothm_events
             - POSTGRES_HOST=localhost
-            - POSTGRES_USER=iothm_events
-            - POSTGRES_PASSWORD=iothm_events
         container_name: iothm_events_database
         image: iothm_events_database:dev
         build:
@@ -54,12 +53,12 @@ services:
             retries: 3
 
     events_rest_api:
+        env_file:
+            - env_secrets.dev
         environment:
-            - DEBUG_MODE=True
-            - HOST=0.0.0.0
-            - PORT=8000
-            - SPEC_DIR=./resources
-            - TEST_MODE=False
+            - APP_HOST=0.0.0.0
+            - APP_PORT=8000
+            - APP_DEBUG_MODE=True
             - VERSION=0.0.1
             - PYTHONUNBUFFERED=1
         container_name: iothm_events_rest_api
@@ -73,6 +72,7 @@ services:
             - iothm_public
         ports:
             - 8000:8000
+            - 8081:8081
         volumes:
             - ./Events REST API/api:/api
             - ./Events REST API/resources/entrypoint.sh:/tmp/entrypoint.sh:ro
@@ -88,4 +88,3 @@ services:
 networks:
     iothm_public:
         name: iothm_public
-

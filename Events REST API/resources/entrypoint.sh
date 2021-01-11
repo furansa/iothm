@@ -3,25 +3,15 @@
 set -e
 
 # Used for debugging if no foreground application is being called
-#while true; do
-#    date
-#    sleep 5
-#done
+while true; do
+    date
+    sleep 5
+done
 
 # Call the application in foreground, in test mode, just run the unit tests,
 # generate test and coverage reports and exit
-if [ ${TEST_MODE} = "True" ]; then
-    TEST_DIR="./tests"
-    TEST_REPORTS="${TEST_DIR}/reports"
-
-    echo "Starting the tests."
-    /usr/bin/env pytest -q --cov=api --cov-report html:${TEST_REPORTS}/coverage --html=${TEST_REPORTS}/$(date +%Y-%m-%d_%H%M%S).html ${TEST_DIR}
-
-    echo "All done, goodbye."
+if [ ${APP_TEST_MODE} = "True" ]; then
+    /usr/bin/env python3 manage.py test -v2
 else
-    if [ ${DEBUG} = "True" ]; then
-        /usr/bin/env python3 manage.py runserver ${HOST}:${PORT} DEBUG=True
-    else
-        /usr/bin/env python3 manage.py runserver ${HOST}:${PORT}
-    fi
+    /usr/bin/env python3 manage.py runserver ${APP_HOST}:${APP_PORT}
 fi
