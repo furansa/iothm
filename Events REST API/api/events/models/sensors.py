@@ -1,21 +1,15 @@
 from django.db import models
 
+from events.models.sensor_types import SensorTypes
 
-class SensorType(models.Model):
+
+class Sensors(models.Model):
     """
-    Represent a sensor_types table instance
+    Represent a sensors table instance
     """
 
+    type = models.ForeignKey(SensorTypes, on_delete=models.CASCADE)
     description = models.CharField(max_length=256, blank=False)
-
-    def get_description(self) -> str:
-        """
-        Return the description
-
-        :return: Description
-        :rtype: str
-        """
-        return self.description
 
     def __repr__(self) -> str:
         """
@@ -24,7 +18,8 @@ class SensorType(models.Model):
         :return: Formal object representation
         :rtype: str
         """
-        return "SensorType(description='{}'".format(self.description)
+        return "Sensors(type='{}', description='{}'".format(self.type, self.description)
 
     class Meta:
+        db_table = "sensors"
         ordering = ["id"]

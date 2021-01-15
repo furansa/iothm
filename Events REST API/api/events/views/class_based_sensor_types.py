@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
-from events.models.sensor_type import SensorType
-from events.serializers import SensorTypeSerializer
+from events.models.sensor_types import SensorTypes
+from events.serializers import SensorTypesSerializer
 
 
 class SensorTypes(APIView):
@@ -25,9 +25,9 @@ class SensorTypes(APIView):
         :return: HTTP response containing all sensor types
         :rtype: DRF Response
         """
-        # sensor_types = [s.description for s in SensorType.objects.all()]
-        sensor_types = SensorType.objects.all()
-        serializer = SensorTypeSerializer(sensor_types, many=True)
+        # sensor_types = [s.description for s in SensorTypes.objects.all()]
+        sensor_types = SensorTypes.objects.all()
+        serializer = SensorTypesSerializer(sensor_types, many=True)
 
         # return Response(sensor_types, status=status.HTTP_200_OK)
         return Response(serializer.data)

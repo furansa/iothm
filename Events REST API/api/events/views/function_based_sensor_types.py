@@ -3,8 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 
-from events.models.sensor_type import SensorType
-from events.serializers import SensorTypeSerializer
+from events.models.sensor_types import SensorTypes
+from events.serializers import SensorTypesSerializer
 
 
 @csrf_exempt  # Mark as cross site request forgery exempt for now
@@ -13,13 +13,13 @@ def sensor_types(request, format=None) -> JsonResponse:
     Handle HTTP GET and POST
     """
     if request.method == "GET":
-        sensor_types = SensorType.objects.all()
-        serializer = SensorTypeSerializer(sensor_types, many=True)
+        sensor_types = SensorTypes.objects.all()
+        serializer = SensorTypesSerializer(sensor_types, many=True)
 
         return JsonResponse(serializer.data, status=status.HTTP_200_OK, safe=False)
     elif request.method == "POST":
         request_data = JSONParser().parse(request)
-        serializer = SensorTypeSerializer(data=request_data)
+        serializer = SensorTypesSerializer(data=request_data)
 
         if serializer.is_valid():
             serializer.save()
@@ -35,18 +35,18 @@ def sensor_type(request, id: int, format=None) -> JsonResponse:
     Handle HTTP GET, PUT and DELETE for one instance
     """
     try:
-        sensor_type = SensorType.objects.get(pk=id)
-    except SensorType.DoesNotExist:
+        sensor_type = SensorTypes.objects.get(pk=id)
+    except SensorTypes.DoesNotExist:
 
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        serializer = SensorTypeSerializer(sensor_type)
+        serializer = SensorTypesSerializer(sensor_type)
 
         return JsonResponse(serializer.data, safe=False)
     elif request.method == "PUT":
         request_data = JSONParser().parse(request)
-        serializer = SensorTypeSerializer(sensor_type, data=request_data)
+        serializer = SensorTypesSerializer(sensor_type, data=request_data)
 
         if serializer.is_valid():
             serializer.save()
@@ -60,12 +60,12 @@ def sensor_type(request, id: int, format=None) -> JsonResponse:
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
 
-def find_by_id(id: int) -> SensorType:
+def find_by_id(id: int) -> SensorTypes:
     """
     Find an instance by id
     """
     try:
-        sensor_type = SensorType.objects.get(pk=id)
+        sensor_type = SensorTypes.objects.get(pk=id)
         return sensor_type
-    except SensorType.DoesNotExist:
+    except SensorTypes.DoesNotExist:
         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
