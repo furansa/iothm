@@ -59,6 +59,7 @@ services:
             - APP_HOST=0.0.0.0
             - APP_PORT=8000
             - APP_DEBUG_MODE=True
+            - APP_TEST_MODE=False
             - VERSION=0.0.1
             - PYTHONUNBUFFERED=1
         container_name: iothm_events_rest_api

@@ -9,12 +9,5 @@ django-cors-headers = "*"
 psycopg2-binary = "*"
 
 [dev-packages]
-black = "==20.8b1"
-bump2version = "*"
 django-debug-toolbar = "*"
-pre-commit = "*"
-pyflakes = "*"
-pytest = "*"
-pytest-cov = "*"
-pytest-html = "*"
 robotframework = "*"

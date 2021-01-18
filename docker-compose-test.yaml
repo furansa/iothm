@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+    events_database:
+        env_file:
+            - env_secrets.test
+        environment:
+            - POSTGRES_HOST=localhost
+        container_name: iothm_events_database
+        image: iothm_events_database:test
+        build:
+            context: ./Events Database/resources
+            args:
+            - IMAGE_DESCRIPTION=IoTHM events database, test image
+        networks:
+            - iothm_public
+        ports:
+            - 5432:5432
+
+    events_rest_api:
+        env_file:
+            - env_secrets.test
+        environment:
+            - APP_HOST=0.0.0.0
+            - APP_PORT=8000
+            - APP_DEBUG_MODE=False
+            - APP_TEST_MODE=True
+            - VERSION=0.0.1
+            - PYTHONUNBUFFERED=1
+        container_name: iothm_events_rest_api
+        image: iothm_events_rest_api:test
+        build:
+            context: ./Events REST API/resources
+            args:
+            - PIP_OPTIONS=--dev --skip-lock --system
+            - IMAGE_DESCRIPTION=IoTHM Events REST API, test image
+        networks:
+            - iothm_public
+        ports:
+            - 8000:8000
+            - 8081:8081
+        volumes:
+            - ./Events REST API/api:/api
+            - ./Events REST API/resources/entrypoint.sh:/tmp/entrypoint.sh:ro
+        depends_on:
+            - events_database
+
+networks:
+    iothm_public:
+        name: iothm_public

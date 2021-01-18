@@ -11,7 +11,7 @@ set -e
 # Call the application in foreground, in test mode, just run the unit tests,
 # generate test and coverage reports and exit
 if [ ${APP_TEST_MODE} = "True" ]; then
-    /usr/bin/env python3 manage.py test -v2
+    /usr/bin/env python3 -Wa manage.py test events.tests.unit -v2
 else
     /usr/bin/env python3 manage.py runserver ${APP_HOST}:${APP_PORT}
 fi
