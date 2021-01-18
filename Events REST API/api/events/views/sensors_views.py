@@ -1,7 +1,12 @@
+import logging
+
 from rest_framework import generics
 
 from events.models.sensors import Sensors
 from events.serializers.sensors_serializer import SensorsSerializer
+
+
+logger = logging.getLogger("events.views.sensors_views")
 
 
 class SensorsListCreate(generics.ListCreateAPIView):
@@ -11,6 +16,7 @@ class SensorsListCreate(generics.ListCreateAPIView):
 
     queryset = Sensors.objects.all()
     serializer_class = SensorsSerializer
+    logger.debug("SensorsListCreate: {}".format(queryset))
 
 
 class SensorsRetrieveUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
@@ -20,3 +26,4 @@ class SensorsRetrieveUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Sensors.objects.all()
     serializer_class = SensorsSerializer
+    logger.debug("SensorsRetrieveUpdateDelete: {}".format(queryset))
