@@ -3,10 +3,10 @@
 set -e
 
 # Used for debugging if no foreground application is being called
-while true; do
-    date
-    sleep 5
-done
+# while true; do
+#     date
+#     sleep 5
+# done
 
 # Call the application in foreground, in test mode, just run the unit tests,
 # generate test and coverage reports and exit
