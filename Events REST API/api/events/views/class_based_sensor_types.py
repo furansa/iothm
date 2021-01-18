@@ -7,7 +7,7 @@ from events.models.sensor_types import SensorTypes
 from events.serializers import SensorTypesSerializer
 
 
-class SensorTypes(APIView):
+class SensorTypesClassBasedViews(APIView):
     """
     Class-based view for sensor types
     """
