@@ -7,12 +7,11 @@
 
 **[WiP]**
 
-The IoTHM is a distributed data-driven IoT platform which combines information
-from different hardware sensors applied to home monitoring. The goal is to
-support embedded platforms such as ESP32 to monitor aspects like temperature,
-humidity, pressure and so on, and make the information available to be easily
-accessed and analyzed by using dashboards or even processed my Machine Learning
-models.
+The IoTHM is a distributed IoT platform which combines information from
+different hardware sensors applied to home monitoring. The goal is to support
+embedded platforms such as ESP32 to monitor aspects like temperature, humidity,
+pressure and so on, and make the information available to be easily accessed and
+analyzed by using dashboards or even processed my Machine Learning models.
 
 This is a open-source project based on many tools such as: Docker, Python,
 Django, PostgreSQL, Redis, Elasticsearch and so on. Here are the services which
