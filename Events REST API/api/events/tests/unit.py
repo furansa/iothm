@@ -32,27 +32,27 @@ class SensorTypesModelTests(TestCase):
         self.assertEqual(sensor_type, "Unit Test Sensor Type")
 
 
-#class SensorTypesViewsTests(TestCase):
+# class SensorTypesViewsTests(TestCase):
 #    """
 #    Tests for the SensorTypes views
 #    """
-
+#
 #    def setUp(self) -> None:
 #        """
 #        Create objects to be used across the test suite
 #        """
 #        SensorTypes.objects.create(description="Unit Test Sensor Type")
-
+#
 #    def test_read_all_view(self) -> None:
 #        """
 #        Test if read all view return the correct results
 #        """
 #        # Get API response
 #        response = client.get(reverse("sensor_types"))
-
+#
 #        # Get data from DB
 #        sensor_types = SensorTypes.objects.all()
 #        serializer = SensorTypesSerializer(sensor_types, many=True)
-
+#
 #        self.assertEqual(response.data, serializer.data)
 #        self.assertEqual(response.status_code, status.HTTP_200_OK)
