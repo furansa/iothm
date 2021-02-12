@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.16.3 FATAL_ERROR)
 
 project(events LANGUAGES CXX)
+
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_COMPILER_LAUNCHER "ccache")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+set(CMAKE_CXX_CPPCHECK "cppcheck")
 
 # CPM packages
 set(CPM_DOWNLOAD_VERSION 0.27.2) 
@@ -14,6 +18,13 @@ endif()
 
 include(${CPM_DOWNLOAD_LOCATION})
 
+CPMFindPackage(
+    NAME Boost
+    GITHUB_REPOSITORY Orphis/boost-cmake
+    VERSION 1.67.0
+    FIND_PACKAGE_ARGUMENTS "COMPONENTS system thread"
+)
+
 CPMAddPackage(
     NAME Catch2
     GITHUB_REPOSITORY catchorg/Catch2
@@ -23,7 +34,8 @@ CPMAddPackage(
 CPMAddPackage(
     NAME crow
     GITHUB_REPOSITORY CrowCpp/crow
-    VERSION 0.1
+    GIT_TAG 0.2
+    VERSION 0.2
 )
 
 # Executable
@@ -31,6 +43,7 @@ add_executable(events src/main.cpp)
 
 # Link dependencies
 target_link_libraries(events
+    Boost
     Catch2
     crow
 )
